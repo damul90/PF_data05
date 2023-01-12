@@ -79,6 +79,3 @@ El presente proyecto tiene como enfoque el mercado e-commerce brasileño, el cua
 <img src="resources/Gantt.jpeg"   
 >
 </p>
-
-
-[Link](https://trello.com/b/yUevKdVg/cronograma)
