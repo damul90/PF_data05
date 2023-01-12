@@ -6,7 +6,7 @@
 </p>
 
 <h1 align="center">Proyecto Final</h1>
-<h1 align="center">Sistema de Análisis de Sentimientos y Reviews</h1>
+<h1 align="center">Análisis de negocio de Olist</h1>
 <h3 align="center"><a href="https://github.com/belensendot">Maria Belén Sendot</a><br>Data Analytics</h3>
 <h3 align="center"><a href="https://github.com/damul90">Daniel Muñoz López</a><br>Data Scientist</h3>
 <h3 align="center"><a href="https://github.com/">Natalia Soledad Trulla</a><br>Data Analytics</h3>
