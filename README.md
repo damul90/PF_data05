@@ -36,7 +36,10 @@ Encontrar soluciones innovadoras que permitan a las PYMES vender sus productos a
 - **Identificar** patrones de conversión según la herramienta de marketing para mejorar estrategias de conversion de ventas.
 
 ## Alcance
-El presente proyecto tiene como enfoque el mercado e-commerce brasileño, el cual está basado en datos históricos de los perfiles de las PyMEs y consumidores finales en los años 2016 - 2018. Su realización está argumentada bajo el principio de crecimiento de una empresa, donde los KPI están directamente relacionados a los objetivos trazados, esto con la finalidad de crear un sistema que sea versátil a los requerimientos del mercado y alcanzar un mejor posicionamiento para cada cliente (PyME). Para lograr este objetivo se dispone a crear un modelo de machine learning que sea capaz de sugerir compras y por tanto aumentar las ventas de un determinado cliente.
+El presente proyecto tiene como enfoque el mercado e-commerce brasileño por lo que cualquier estudio y propuesta será acotada a los límites de Brasil debido a que los contenidos de los datos tienen su completitud en dicho país ya que históricamente Olist ha estado dominando en este mercado.
+
+La propuesta principal va a estar orientada a la calidad de los servicios brindados mediante mejoras de marketing, generar propuestas para mantener un stock fiel a los productos disponibles y agilizar los tiempos de envíos así como tratar de hacer más accesibles los precios de los mismos investigando cuales son las zonas con menor alcance para este servicio.
+
 
 ## KPIs
 
@@ -79,3 +82,18 @@ El presente proyecto tiene como enfoque el mercado e-commerce brasileño, el cua
 <img src="resources/Gantt.jpeg"   
 >
 </p>
+
+## EDA preliminar
+
+- CATEGORY_NAME: Contiene el nombre de los productos en portugues y en inglés, no contiene nulos.
+- SELLERS: Contiene ciudad , estado y código de área del vendedor (o del lugar de ventas habría que ver), no contiene nulos.
+- PRODUCTS: Contiene las características de los productos como las dimensiones, el peso, la cantidad de fotos (creo), categoría de producto en cuestión (perfumería,artes,etc).
+nulos de PRODUCTS: categoría del producto,largo del nombre del producto,largo de la descripción,cantidad de fotos: 1.9%, dimensiones del producto y peso: menos del 0,01% 
+- ORDERS: Contiene las características de cada pedido, estado del pedido (enviado,cancelado,etc) y las fechas establecidas: fecha de compra, fecha de envío, fecha estimada y fecha de entrega. Tiene como nulos: fecha de compra: 0.2%, fecha de envío: 1.2%, fecha de entrega: 3%. 
+- CLOSED_DEALS: Contiene información acerca de las ventas concretadas, rol asignado a cada vendedor con 21% de datos nulos, que categoría de producto fue vendido con 0.12% de nulos, si tiene empresa con 92.56% de datos nulos, tipo de venta (reventa, manufactura) con 1.19% de nulos, promedios de stock con 92.16% de nulos.
+- CUSTOMER: Información de la ubicación del cliente, código postal, ciudad y estado.
+- GEOLOCATION: información de geolocalización, con los códigos postales de Brasil, ciudades, estados y coordenadas geográficas.
+- MARKETING_QUALIFIED_LEADS: Información del tipo de contacto con el cliente, fecha de primer contacto, página del producto, origen de su búsqueda, esta última variable con un 0.75% de valores nulos.
+- ORDER_ITEMS : En este dataset se encuentra información relacionada a los diferentes artículos vendidos, como el Id del vendedor, los precios del productos, costos de envio, fechas maxima de envios, junto con sus respectivos Id, cabe resaltar que cada columna posee un total de 112.650 filas, ninguna de ellas tiene datos nulos y los tipos de datos de cada columna están correctos.
+- ORDER_PAYMENTS : En este dataset se encuentra la información de la forma de pago de cada pedido junto con su valor correspondiente, se evidencia que el tipo de dato de cada columna es el indicado y de los 103.886 datos que contienen cada una de estas no se evidencian nulos, lo cual facilita la tarea de análisis.
+- ORDER_REVIEWS : Este dataset contiene información de los feedback hechos por distintos compradores, acá se guardan datos relacionados con el puntaje dado, mensaje y su respectivo título, fecha de creación y fecha de respuesta por parte de la empresa, Se evidencia en el dataset que las columnas review_comment_title y review_comment_message tienen un 88.34 % y 58.70 % de datos nulos respectivamente, se hace necesario evaluar la posibilidad de eliminar review_comment_title debido a que no aporta mayor información a un futuro análisis.
