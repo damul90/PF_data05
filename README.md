@@ -15,7 +15,7 @@
 
 <hr>
 
-## Introducción.
+## Introducció
 
 Olist es una compañía que trabaja en el ámbito del e-commerce, cuyo objetivo principal es multiplicar las ventas de lo susuarios por medio de un modelo que permite crear sólidas conexiones entre los *PYMES* y los clientes.
 
