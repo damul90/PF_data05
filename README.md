@@ -86,8 +86,8 @@ La propuesta principal va a estar orientada a la calidad de los servicios brinda
 ## EDA preliminar
 
 - CATEGORY_NAME: Contiene el nombre de los productos en portugues y en inglés, no contiene nulos.
-- SELLERS: Contiene ciudad , estado y código de área del vendedor (o del lugar de ventas habría que ver), no contiene nulos.
-- PRODUCTS: Contiene las características de los productos como las dimensiones, el peso, la cantidad de fotos (creo), categoría de producto en cuestión (perfumería,artes,etc).
+- SELLERS: Contiene ciudad , estado y código de área del vendedor, no contiene nulos.
+- PRODUCTS: Contiene las características de los productos como las dimensiones, el peso, la cantidad de fotos, categoría de producto en cuestión (perfumería,artes,etc).
 nulos de PRODUCTS: categoría del producto,largo del nombre del producto,largo de la descripción,cantidad de fotos: 1.9%, dimensiones del producto y peso: menos del 0,01% 
 - ORDERS: Contiene las características de cada pedido, estado del pedido (enviado,cancelado,etc) y las fechas establecidas: fecha de compra, fecha de envío, fecha estimada y fecha de entrega. Tiene como nulos: fecha de compra: 0.2%, fecha de envío: 1.2%, fecha de entrega: 3%. 
 - CLOSED_DEALS: Contiene información acerca de las ventas concretadas, rol asignado a cada vendedor con 21% de datos nulos, que categoría de producto fue vendido con 0.12% de nulos, si tiene empresa con 92.56% de datos nulos, tipo de venta (reventa, manufactura) con 1.19% de nulos, promedios de stock con 92.16% de nulos.
