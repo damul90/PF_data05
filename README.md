@@ -79,8 +79,7 @@ La propuesta principal va a estar orientada a la calidad de los servicios brinda
 ## Cronograma
 
 <p align="center">
-<img src="resources/Gantt.jpeg"   
->
+<img src="resources/Gantt.jpeg">
 </p>
 
 ## EDA preliminar
@@ -101,6 +100,5 @@ nulos de PRODUCTS: categoría del producto,largo del nombre del producto,largo d
 ## Diagrama de entidad relación
 
 <p align="center">
-<img src="resources/DER.png"   
->
+<img src="resources/DER.png">
 </p>
