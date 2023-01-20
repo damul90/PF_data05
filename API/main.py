@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import io
 import boto3
+
 s3_client = boto3.client('s3',
     aws_access_key_id = 'AKIA5B256M6M4Z6LAAHE',
     aws_secret_access_key = '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',
@@ -22,18 +23,18 @@ for my_bucket_object in my_bucket.objects.all():
     df = pd.read_parquet(pq_file)
     dataframes.append({nombre:df})
 
-closed_deals = dataframes[0]['closed-deals']
-custumers = dataframes[1]['custumers']
-marketing = dataframes[2]['marketing']
-order_items = dataframes[3]['order-items']
-order_sellers = dataframes[4]['sellers']
+# closed_deals = dataframes[0]['closed-deals']
+# custumers = dataframes[1]['custumers']
+# marketing = dataframes[2]['marketing']
+# order_items = dataframes[3]['order-items']
+# order_sellers = dataframes[4]['sellers']
 order_delivered = dataframes[5]['order-sin-nulos']
-payment_sequentel = dataframes[6]['payment']
-products = dataframes[7]['products']
-reviews = dataframes[8]['reviews']
+# payment_sequentel = dataframes[6]['payment']
+# products = dataframes[7]['products']
+# reviews = dataframes[8]['reviews']
 orders_No_delivered = dataframes[9]['Order-nulos-lau']
-conexiones_X_estado = dataframes[10]['conectividad']
-geolocation = dataframes[11]['geolocation']
+# conexiones_X_estado = dataframes[10]['conectividad']
+# geolocation = dataframes[11]['geolocation']
 
 app = FastAPI(title='xdxd',description='matenme')
 
