@@ -43,7 +43,7 @@ button_resenias = st.sidebar.button(':scroll: Análisis de Reseñas')
 #----------------------------------------------SECCIÓN DE POWER BI--------------------------------------------------
 st.markdown("## :bar_chart: Reporte en PowerBI")
 st.markdown("Para ver el reporte, ir al siguiente enlace:")
-st.markdown('[Reporte en PowerBI](https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=871c010f-5e61-4fb1-83ac-98610a7e9110&scope=https%3A%2F%2Fanalysis.windows.net%2Fpowerbi%2Fapi%2F.default%20openid%20profile%20offline_access&redirect_uri=https%3A%2F%2Fapp.powerbi.com%2Fsignin&client-request-id=23b02a41-81f7-4e40-8de9-212f93ffeff9&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=2.25.0&client_info=1&code_challenge=3woiTSJb18U43lzqlGqz99bOucx5_Vj5Hi0AUb_RVwQ&code_challenge_method=S256&nonce=23e22902-513f-417c-83ac-30c3f3098715&state=eyJpZCI6IjdhNjdjNDU1LTY1ZWUtNDlmYi05OGY4LTk0ZjgxNWY2ODA3MiIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicmVkaXJlY3QifX0%3D%7C1675138922645.5%3B1675138923446.9&site_id=500453&nux=1)',unsafe_allow_html=True)
+st.markdown('[Reporte en PowerBI](https://app.powerbi.com/view?r=eyJrIjoiMThmZWVhZWEtMDczYy00NWMzLWJkYTktODU0NmIzZTFjYWJkIiwidCI6IjYxOGJhYjBmLTIwYTQtNGRlMy1hMTBjLWUyMGNlZTk2YmIzNSIsImMiOjR9)',unsafe_allow_html=True)
 st.markdown("---")
 #----------------------------------------------SECCIÓN DE VENTAS----------------------------------------------------
 
