@@ -48,8 +48,6 @@ if menu == 'Analisis principal, power bi':
     customers = dataframes['customers.csv']
     geolocation = dataframes['geolocation.csv']
     marketing_qualified_leads = dataframes['marketing_qualified_leads.csv']
-    # orders_delivered = dataframes['orders_delivered.csv']
-    # orders_No_delivered = dataframes['orders_No_delivered.csv']
     order_items = dataframes['order_items.csv']
     order_payments = dataframes['order_payments.csv']
     order_reviews = dataframes['order_reviews.csv']
@@ -88,80 +86,59 @@ if menu == 'Analisis principal, power bi':
     max_date = np.datetime64(end_date)
     orders_2 = orders.copy(deep=True)
     orders_2 = orders_2[(orders_2['order_purchase_timestamp']>=min_date) & (orders_2['order_purchase_timestamp']<=max_date)]
-    orders_2['count'] = 1
+    orders_2['ventas'] = 1
     orders_2 = orders_2.set_index(pd.DatetimeIndex(orders_2['order_purchase_timestamp'])).drop("order_purchase_timestamp",axis=1)
-
-    data_quarter = orders_2.resample('Q').sum()
+    data_quarter = orders_2[orders_2['order_status']=='delivered']
+    data_quarter = data_quarter.resample('Q').sum()
 
     #--------------Métricas y KPI's--------------
     with st.form('input'):        #Selección de año y trimestre
         st.markdown("Selecciona el año y el trimestre que desees visualizar")
-        selected_year = st.selectbox('Selecciona el año:', options = [2016,2017,2018])
+        selected_year = st.selectbox('Selecciona el año:', options = [2018,2017,2016])
         selected_quarter = st.selectbox('Selecciona el trimestre:', options = [1,2,3,4])
 
         submit_button = st.form_submit_button(label='Confirmar')
     
-   
-    st.write(data_quarter.index.year)
-    st.write(data_quarter[(data_quarter.index.quarter==selected_quarter) & (data_quarter.index.year==selected_year)]['count'])
-    variacion = 0
+    if selected_quarter < 4 and selected_year==2016:
+        variacion = "sin dato"
+    else:
+        sales_trim_actual = data_quarter[(data_quarter.index.quarter==selected_quarter) & (data_quarter.index.year==selected_year)].values[0][0]
+    
+        if selected_quarter == 1:
+            selected_quarter_anterior = 4
+            selected_year_anterior = selected_year-1 
+        else:
+            selected_quarter_anterior = selected_quarter-1
+            selected_year_anterior = selected_year
+    
+        sales_trim_pasado = data_quarter[(data_quarter.index.quarter==selected_quarter_anterior) & (data_quarter.index.year==selected_year_anterior)].values[0][0]
+        
+        variacion = round((sales_trim_actual/sales_trim_pasado-1)*100,2)
     porcentaje_marketing = closed_deals.shape[0]/marketing_qualified_leads.shape[0]
-    col1, col2, col3 = st.columns(3)
-
+    col1, col2 = st.columns(2)
     col1.metric(label="Variación Porcentual de Ventas", value=variacion)
     col2.metric(label="Porcentaje de Marketing", value=f'{porcentaje_marketing*100}%')
-    col3.metric(label="Variación Trimestral de Ganancias", value="70 °F")
-
-
-    #--------------Gráfico lineal: Ventas por mes--------------
-    st.write(data_quarter['count'])
-    st.markdown("### Cantidad de ventas por mes")
-    data_week = orders_2.resample('W').sum()
-    st.line_chart(data_week)
 
     #--------------Porcentaje de Capatación por Marketing--------------
     st.markdown("### Porcentaje de captación de vendedores por marketing")
     df_temp = pd.DataFrame(marketing_qualified_leads['origin'].value_counts())
     st.table(df_temp)
 
-    #--------------Gráfico circular--------------
-    col1, col2 = st.columns(2)
+    #--------------Gráfico de barras--------------
+    
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
     payment_type = order_payments['payment_type'].unique().tolist()
-    counts = order_payments['payment_type'].value_counts()
+    counts = list(order_payments['payment_type'].value_counts())
 
     pastel = sns.color_palette('pastel')
     husl = sns.color_palette('husl')
-
-    fig1, ax1 = plt.subplots()
-    ax1.pie(counts, labels=payment_type,colors = [pastel[0],pastel[1],husl[4],pastel[9]], startangle=90,autopct='%.0f%%')
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-    col1.pyplot(fig1)
-
-    #--------------Gráfico de Barras--------------
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
 
     plt.rcdefaults()
     fig, ax = plt.subplots()
 
     # Example data
-    people = ('Tom', 'Dick', 'Harry', 'Slim', 'Jim')
-    y_pos = np.arange(len(people))
-    performance = 3 + 10 * np.random.rand(len(people))
-    error = np.random.rand(len(people))
-
-    ax.barh(y_pos, performance, xerr=error, align='center')
-    ax.set_yticks(y_pos, labels=people)
-    ax.invert_yaxis()  # labels read top-to-bottom
-    ax.set_xlabel('Performance')
-    ax.set_title('How fast do you want to go today?')
-
-    col2.pyplot(fig)
-
-    st.markdown("---")
-
+    sns.barplot(x=payment_type,y=counts,ecolor=[pastel[0],pastel[1],husl[4],pastel[9]])
+    st.pyplot(fig)
     #----------------------------------------------SECCIÓN DE CLIENTES--------------------------------------------------
 
     st.markdown("## :male-office-worker: Análisis de clientes")
@@ -169,10 +146,9 @@ if menu == 'Analisis principal, power bi':
     porcentaje_cancelacion = round(orders[orders['order_status']!='delivered'].shape[0]/(orders.shape[0]) *100,2)
 
     #--------------Métricasy KPI's--------------
-    col1, col2, col3 = st.columns(3)
-    col1.metric(label="Variación Porcentual de Ventas", value='70 °F')
-    col2.metric(label="Porcentaje Cancelación de órdenes", value=f'{porcentaje_cancelacion}%')
-    col3.metric(label="Variación Trimestral de Ventas completadas", value=100-porcentaje_cancelacion)
+    col1, col2 = st.columns(2)
+    col1.metric(label="Porcentaje Cancelación de órdenes", value=f'{porcentaje_cancelacion}%')
+    col2.metric(label="Variación Trimestral de Ventas completadas", value=100-porcentaje_cancelacion)
 
     #--------------Gráfico lineal--------------
     st.markdown("### Ventas realizadas mes a mes")
@@ -198,7 +174,7 @@ if menu == 'Analisis principal, power bi':
 
     #--------------------------------------SECCIÓN MAPAS CLIENTES-COMPRADORES-----------------------------------------
 
-    st.markdown("## :currency_exchange: Clientes vs Vendedores")
+    st.markdown("## :currency_exchange: distancia entre clientes y vendedores")
     #Elegimos los dataframes que queremos trabajar con las columnas renombradas igual para poder hacer el merge 
     df_sellers = sellers.rename(columns={'seller_zip_code_prefix':'zip_code_prefix'})
     df_geo = geolocation.rename(columns={'geolocation_zip_code_prefix':'zip_code_prefix'})
@@ -210,8 +186,14 @@ if menu == 'Analisis principal, power bi':
     df_customers_geo = pd.merge(df_customers,df_geo, on='zip_code_prefix')
 
     #Creación de la métrica
+    demora_days = orders[orders['order_status']=='delivered']
+    demora_days['order_delivered_customer_date'] = pd.to_datetime(demora_days.order_delivered_customer_date)
+    
+    demora_days = demora_days[['order_purchase_timestamp','order_delivered_customer_date']]
+    demora_days['demora'] = (demora_days['order_delivered_customer_date']-demora_days['order_purchase_timestamp']).dt.days
+    demora = demora_days['demora'].mean()
     col1, col2, col3 = st.columns(3)
-    col2.metric(label="Promedio de demora en días", value='70 °F')
+    col2.metric(label="Promedio de demora en días", value=round(demora,0))
 
     # Creación de los mapas
     col1, col2 = st.columns(2) #Se crean dos columnas donde van los mapas
@@ -233,7 +215,7 @@ if menu == 'Analisis principal, power bi':
 
     #Creación de la relación de las tablas necesarias para encontrar la información correspondiente
     df = pd.merge(customers,pd.merge(order_reviews,orders[orders['order_status']=='delivered'], on='order_id'), on = 'customer_id')
-
+ 
     option = st.selectbox('Selecciona el estado que desee visualizar', (df['customer_state'].unique()))
 
     #Conteo de reviews para cada caso: positivos, negativos y neutros
@@ -262,11 +244,8 @@ if menu == 'Analisis principal, power bi':
     elif score_promedio > 4.44:
         col3.markdown("## :star: :star: :star: :star:")
 
-    col1, col2 = st.columns(2)
-    col1.markdown("## Top 10 de mejores comentarios")
-    col1.table(df[['review_score', 'review_comment_message']][df['customer_state']==option].sort_values('review_score').tail(10))
-    col2.markdown("## Top 10 de peores comentarios")
-    col2.table(df[['review_score', 'review_comment_message']][df['customer_state']==option].sort_values('review_score').head(10))
+    st.markdown("## Comentarios")
+    st.table(df[['review_score', 'review_comment_message']][(df['customer_state']==option) & (df['review_comment_message'] != 'no comment')].sort_values('review_score').head(15))
 
 if menu == 'Machine learning: sistema de recomendaciones':
         
@@ -306,14 +285,15 @@ if menu == 'Machine learning: sistema de recomendaciones':
                 return neighbours_ids
         return None
 
-    st.title("Modelo de Machine Learning: Sistema de recomendaciones")
+    st.title("Sistema de recomendaciones")
+    st.markdown("#### :robot_face: Modelo de Machine Learning")
+    st.markdown("##### Catálogo de productos")
     st.dataframe(df_show)
-    product_label_encoder = st.number_input("ingrese el numero del producto",step=1,format="%i")
+    product_label_encoder = st.number_input("Ingrese el numero del producto",step=1,format="%i")
     if product_label_encoder:
         list_recomended = find_similar_products(product_label_encoder,X,3)
         if type(list_recomended) == list:
-            st.write("productos parecidos:")
+            st.markdown("### Productos recomendados:")
             st.dataframe(df_test.loc[df_test['product_le'].isin(list_recomended)])
         else:
-            st.write("no hay conincidencias")
-
+            st.markdown("### No hay sugerencias para el producto seleccionado")
