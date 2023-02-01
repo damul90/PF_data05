@@ -150,7 +150,7 @@ Se busca siempre que las dim_tables apunten y tengan una relación 1 a muchos ha
 
 - **Creación de dashboard**: Con todo lo anterior listo realizamos la creación del dashboard. Primero, se creó una estructura básica con filtros de tiempo, ubicación y categoría y se pusieron tarjetas con información relevante como la cantidad de ventas, de clientes, de órdenes y reseñas de clientes. Además, realizamos gráficos que muestran de la forma más intuitiva la información para su análisis. Por último, se utilizó una paleta con los colores de la empresa para personalizar todo el dashboard.
 
-[Dashword](https://app.powerbi.com/view?r=eyJrIjoiZWNlMTExM2YtZTM2ZC00OWQ5LWJlNTItODdiNWU1NzVlZjAyIiwidCI6IjYxOGJhYjBmLTIwYTQtNGRlMy1hMTBjLWUyMGNlZTk2YmIzNSIsImMiOjR9&pageName=ReportSection)
+[Dashword](https://app.powerbi.com/view?r=eyJrIjoiZWNlMTExM2YtZTM2ZC00OWQ5LWJlNTItODdiNWU1NzVlZjAyIiwidCI6IjYxOGJhYjBmLTIwYTQtNGRlMy1hMTBjLWUyMGNlZTk2YmIzNSIsImMiOjR9&pageName=ReportSection36e877fc4ae0d0603ad4)
 
 
 ## Análisis de ventas según objetivos
