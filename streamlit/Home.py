@@ -174,7 +174,7 @@ if menu == 'Analisis principal, power bi':
 
     #--------------------------------------SECCIÓN MAPAS CLIENTES-COMPRADORES-----------------------------------------
 
-    st.markdown("## :currency_exchange: distancia entre clientes y vendedores")
+    st.markdown("## :currency_exchange: Distancia entre clientes y vendedores")
     #Elegimos los dataframes que queremos trabajar con las columnas renombradas igual para poder hacer el merge 
     df_sellers = sellers.rename(columns={'seller_zip_code_prefix':'zip_code_prefix'})
     df_geo = geolocation.rename(columns={'geolocation_zip_code_prefix':'zip_code_prefix'})
