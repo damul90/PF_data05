@@ -278,9 +278,10 @@ if menu == 'Machine learning: sistema de recomendaciones':
         if product_vector.size > 0:
             neighbours = KNN.kneighbors(product_vector, return_distance = True)
             for i in range(1,k+1):
-                if neighbours[0].item(i) < 0.2:
-                    neighbours_ids.append(neighbours[1].item(i))
-                
+                if neighbours[1].item(i) != product_id:
+                    if neighbours[0].item(i) < 0.3:
+                        neighbours_ids.append(neighbours[1].item(i))
+               
             if len(neighbours_ids) > 0:
                 return neighbours_ids
         return None
